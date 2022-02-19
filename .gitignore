@@ -1,0 +1,5 @@
+.vscode
+/picturePuzzleJavaFX/shade
+/picturePuzzleJavaFX/target
+output/
+!output/output.zip

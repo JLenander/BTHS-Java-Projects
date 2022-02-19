@@ -1,0 +1,11 @@
+# TODO
+- [ ] Permissions to use images?
+- [ ] highlight currently selected images (then can remove the "you can't swap right now message")
+- [ ] prevent growth on hover of images when won (and when winning animation)
+- [ ] difficulty out of 10
+- [ ] clicking twice on the same image doesn't count as a swap
+- [ ] completed puzzles on the home page
+- [ ] add quit button
+- [ ] images in jar file???
+- [ ] puzzle creator tool?
+- [ ] slice the images in application so puzzles is just a set of images?
