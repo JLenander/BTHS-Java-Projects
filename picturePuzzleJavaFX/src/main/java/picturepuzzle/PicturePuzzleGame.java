@@ -120,6 +120,10 @@ public class PicturePuzzleGame
                         {
                             indexOne = index;
                         }
+                        else if(indexOne == index) //deselect both images. Do not swap image with itself.
+                        {
+                            deselectImage();
+                        }
                         else //store the second selected image and then swap the images.
                         {
                             indexTwo = index;
@@ -151,6 +155,13 @@ public class PicturePuzzleGame
         //two swap animations are required for simulatenous swaps
         swapAnimationOne = new SequentialTransition(imgOneFirstRotate, imgOneSecondRotate);
         swapAnimationTwo = new SequentialTransition(imgTwoFirstRotate, imgTwoSecondRotate);
+        swapAnimationTwo.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                allowButtons = true;
+            }
+        });
 
         //Initializes the puzzle win animations. The actual animations are puzzle dependant and are modified in updateActiveImages();
         puzzleWinTranslateTransitions = new TranslateTransition[16];
@@ -241,14 +252,13 @@ public class PicturePuzzleGame
 
     /**
      * Deselects any selected images. Also handles clearing the visual indicator for selected images.
-     * Only functions when allowSelection is true.
      */
     public void deselectImage()
     {
         if(allowSelection)
         {
             indexOne = -1;
-            indexTwo = -1;    
+            indexTwo = -1;
         }
     }
 
@@ -305,8 +315,7 @@ public class PicturePuzzleGame
                     {
                         //Resets the index variables after the animation is finished.
                         activePuzzle.swap(indexOne, indexTwo);
-                        indexOne = -1;
-                        indexTwo = -1;
+                        deselectImage();
 
                         //Checks if the puzzle is solved
                         if(activePuzzle.isSolved())
@@ -408,16 +417,17 @@ public class PicturePuzzleGame
         if(indexOne == -1 || indexTwo == -1)
         {
             System.out.println("Invalid swap indices");
+            deselectImage();
         }
         else
         {
             //change the animations to the selected images
             setAnimationNode(imageViewGameObjects[indexOne], imageViewGameObjects[indexTwo]);
+            allowButtons = false; //This is reset at the end of the animation
             swapAnimationOne.play();
             swapAnimationTwo.play();
+            numSwaps++;
         }
-        
-        numSwaps++;
     }
 
     /**
