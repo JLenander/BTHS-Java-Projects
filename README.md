@@ -8,9 +8,10 @@ see [docs link](https://openjfx.io/openjfx-docs/#modular) and [example github](h
 
 1. go into directory `picturePuzzleJavaFX`
 2. To run, `mvn clean javafx:run`
-3. For cross-platform jar file, before compiling into a jar file uncomment the dependencies in `pom.xml`
-4. To make a jar file, `mvn compile package`
-5. jar file under `picturePuzzleJavaFX/shade` is the one that includes the javafx packages.
+3. To make a jar file, `mvn compile package`
+4. jar file under `picturePuzzleJavaFX/shade` is the one that includes the javafx packages.
 
 jar file compilation depends on the *javafx-maven-plugin* as well as the *maven-shade-plugin* in *pom.xml*
 jar file needs the *images* directory to be in the same directory as it is passed to.
+
+Image Credit: Nasa, Valve, Nintendo, XCOM, Frontier, u/ryanchatfieldimages
