@@ -167,7 +167,7 @@ public class App extends Application
             public void handle(ActionEvent event)
             {
                 primaryStage.setScene(gameScreenScene);
-                primaryStage.setTitle("Current Puzzle: " + game.getActiveName());
+                primaryStage.setTitle("Picture Puzzle Game - Current Puzzle: " + game.getActiveName());
             }
         });
         mainMenu.getChildren().add(goToGameScreen);
