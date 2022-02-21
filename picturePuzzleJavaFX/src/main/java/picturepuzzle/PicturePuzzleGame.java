@@ -9,6 +9,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.*;
 import javafx.animation.*;
 
+import javafx.scene.shape.*;
+import javafx.scene.paint.*;
+
 /**
  * Handles all the game logic
  */
@@ -28,6 +31,8 @@ public class PicturePuzzleGame
     private Text previewImageText;
     /**The 16 imageView objects that make up the split image in the game */
     private ImageView[] imageViewGameObjects;
+    /**The 16 rectangle objects that enable selected image border coloring (imageViews have no javafx border css attribute). Parallel to the imageViewGameObjects array */
+    private Rectangle[] imageViewRectangles;
     /**Stores the indices of the game images that are to be swapped */
     private int indexOne = -1, indexTwo = -1;
     /**The javafx swap animation used when swapping two images the user selects*/
@@ -91,11 +96,15 @@ public class PicturePuzzleGame
         previewImageView.setLayoutX(600);
         previewImageView.setLayoutY(90);
 
+        imageViewRectangles = new Rectangle[16];
         imageViewGameObjects = new ImageView[16];
         for(int i = 0; i < getActiveImageArray().length; i++)
         {
             imageViewGameObjects[i] = new ImageView(getActiveImageArray()[i]);
             imageViewGameObjects[i].setPreserveRatio(true);
+
+            //Rectangle position is set in updateActiveImages()
+            imageViewRectangles[i] = new Rectangle(0, 0, Paint.valueOf("whitesmoke"));
 
             //Sets the action of the images when clicked.
             imageViewGameObjects[i].setOnMouseClicked(new EventHandler<MouseEvent>()
@@ -119,8 +128,8 @@ public class PicturePuzzleGame
                         if(indexOne == -1 && indexTwo == -1) //No other images are selected, store the first selected image
                         {
                             indexOne = index;
-                            imageViewGameObjects[indexOne].setStyle("-fx-opacity: 0.8;");
-                        }
+                            imageViewRectangles[indexOne].setFill(Paint.valueOf("deepskyblue"));
+                            }
                         else if(indexOne == index) //deselect both images. Do not swap image with itself.
                         {
                             deselectImage();
@@ -134,11 +143,11 @@ public class PicturePuzzleGame
                     }
                     else
                     {
-                        feedbackMessage.setText("You can't swap right now.");
                         System.out.println("allowSelection is false");
                     }
                 }
             });
+
 
             buttonFont = new Font(30);
         }
@@ -260,8 +269,7 @@ public class PicturePuzzleGame
      */
     public void clearSelectStyle()
     {
-        imageViewGameObjects[indexOne].setStyle("-fx-opacity: 1.0");
-
+        imageViewRectangles[indexOne].setFill(Paint.valueOf("whitesmoke"));
     }
 
     /**
@@ -358,6 +366,7 @@ public class PicturePuzzleGame
     /**
      * Updates the javafx objects of puzzle specific elements (The preview screen and the puzzle game screen)
      * Also generates the puzzle win animations.
+     * Also updates the size of the select style rectangles.
      */
     private void updateActiveImages()
     {
@@ -369,7 +378,7 @@ public class PicturePuzzleGame
 
         //Calculates the necessary image offsets
         int imageWidth = (int) getActiveImageArray()[0].getWidth(), imageHeight = (int) getActiveImageArray()[0].getHeight();
-        int targetGap = 10, xOffset = 0, yOffset = 0; //The targeted space between images in the puzzle and the offset variables that change for every object MUST BE EVEN
+        int targetGap = 12, xOffset = 0, yOffset = 0; //The targeted space between images in the puzzle and the offset variables that change for every object MUST BE EVEN
         int baseXOffset, baseYOffset = 90; //The Base offset for the entire array. This is the top left corner of the first image.
 
         //centers the xOffset of the puzzle based on the targetgap and the image width.
@@ -383,6 +392,12 @@ public class PicturePuzzleGame
             //Sets the offset for the images based on the offset of the entire array of images (baseoffset) and the individual image offset
             imageViewGameObjects[i].setLayoutX(baseXOffset + xOffset);
             imageViewGameObjects[i].setLayoutY(baseYOffset + yOffset);
+
+            //Sets the select style rectangle sizes and positions. These rectangles cover image size plus halfway to the next image (5px border)
+            imageViewRectangles[i].setHeight(imageHeight + (targetGap));
+            imageViewRectangles[i].setWidth(imageWidth + (targetGap));
+            imageViewRectangles[i].setX(baseXOffset + xOffset - (targetGap/2));
+            imageViewRectangles[i].setY(baseYOffset + yOffset - (targetGap/2));
             
             //Modifies the individual offset for the next image
             if((i + 1) % 4 == 0) //We are at the 4th image in the row, reset the xOffset and move to the next row
@@ -539,6 +554,14 @@ public class PicturePuzzleGame
     public ImageView[] getImageViewGameObjects()
     {
         return imageViewGameObjects;
+    }
+
+    /**
+     * @return The array of 16 javafx Rectangle objects that sit behind the imageViewGameObjects
+     */
+    public Rectangle[] getImageViewRectangles()
+    {
+        return imageViewRectangles;
     }
 
     /**

@@ -12,6 +12,8 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
 
+import javafx.scene.paint.*;
+
 public class App extends Application 
 {
     @Override
@@ -70,7 +72,7 @@ public class App extends Application
         Text radioButtonInstruction = new Text(90, 170, "Puzzle Select");
         radioButtonInstruction.setFont(new Font(35));
         mainMenu.getChildren().addAll(game.getPreviewImageView(), game.getPreviewImageText(), radioButtonInstruction);
-        Scene mainMenuScene = new Scene(mainMenu, 1920, 1080);
+        Scene mainMenuScene = new Scene(mainMenu, 1920, 1080, Paint.valueOf("whitesmoke"));
 
         /**
          * The actual picture puzzle game screen.
@@ -124,9 +126,10 @@ public class App extends Application
         });
         gameScreen.getChildren().add(resetButton);
 
+        gameScreen.getChildren().addAll(game.getImageViewRectangles());
         gameScreen.getChildren().addAll(game.getImageViewGameObjects());
         gameScreen.getChildren().addAll(game.getPuzzleDescriptionText(), game.getFeedbackMessageText());
-        Scene gameScreenScene = new Scene(gameScreen, 1920, 1080);
+        Scene gameScreenScene = new Scene(gameScreen, 1920, 1080, Paint.valueOf("whitesmoke"));
         gameScreenScene.getStylesheets().add("picturepuzzle/game.css");
 
         /* 
