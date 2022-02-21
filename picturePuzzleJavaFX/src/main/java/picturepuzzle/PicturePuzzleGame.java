@@ -203,8 +203,6 @@ public class PicturePuzzleGame
             reversedPuzzleWinTranslateTransitions[i] = new TranslateTransition(Duration.millis(1), imageViewGameObjects[i]);
         }
 
-        updateActiveImages();
-        reset();
         
         //adds the transitions the the animations
         puzzleWinAnimation = new SequentialTransition();
@@ -226,6 +224,9 @@ public class PicturePuzzleGame
                 allowButtons = true;
             }
         });
+
+        updateActiveImages();
+        reset();
     }
 
     /**
