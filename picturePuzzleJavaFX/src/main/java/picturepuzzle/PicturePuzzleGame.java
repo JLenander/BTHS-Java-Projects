@@ -372,7 +372,11 @@ public class PicturePuzzleGame
     {
         //Updates puzzle specific text objects
         puzzleDescriptionText.setText(activePuzzle.getDescription());
-        previewImageText.setText("Estimated difficulty: " + activePuzzle.getDifficulty() + " out of 10. " + activePuzzle.getDescription());
+
+        previewImageText.setText("Estimated difficulty: " + activePuzzle.getDifficulty() + " out of 10.");
+        if (!activePuzzle.wasCompleted())
+            previewImageText.setText(previewImageText.getText() + "\nYou have not completed this puzzle yet. Complete it to unblur this preview!");
+        previewImageText.setText(previewImageText.getText() + "\n" + activePuzzle.getDescription());
 
         previewImageView.setImage(activePuzzle.getPreviewImage());
 

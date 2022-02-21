@@ -18,8 +18,12 @@ public class Puzzle
     private String[] imageStates = SOLVED_STATE.clone();
     /**An array of javafx Image objects */
     private Image[] images;
-    /**The puzzle preview javafx image object */
-    private Image preview;
+    /**The puzzle preview javafx image object for the uncompleted puzzle image preview*/
+    private Image uncompletedPreview;
+    /**The puzzle preview javafx image object for the completed puzzle image preview*/
+    private Image completedPreview;
+    /**Whether this puzzle has been completed or not */
+    private boolean completed;
     
     /**
      * Each Puzzle object contains arrays for 16 javafx Image objects. The image puzzle is arranged in a 4x4 grid, with images:<p> A-D, E-H, I-L, M-P <p>left to right, and top to bottom.
@@ -35,6 +39,7 @@ public class Puzzle
         this.description = description;
         this.location = location;
         this.difficulty = difficulty;
+        this.completed = false;
 
         //creation of the image objects
         images = new Image[16];
@@ -44,7 +49,8 @@ public class Puzzle
             images[i] = new Image(getClass().getResource("/" + location + imageStates[i]).toString());
         }
 
-        preview = new Image(getClass().getResource("/" + location + "preview.png").toString());
+        uncompletedPreview = new Image(getClass().getResource("/" + location + "uncompletedPreview.png").toString());
+        completedPreview = new Image(getClass().getResource("/" + location + "completedPreview.png").toString());
     }
 
     /**
@@ -67,11 +73,14 @@ public class Puzzle
 
     /**
      * Gets the puzzle preview javafx Image object
-     * @return the puzze preview javafx Image object
+     * @return the puzzle preview javafx Image object
      */
     public Image getPreviewImage()
     {
-        return preview;
+        if(completed)
+            return completedPreview;
+        
+        return uncompletedPreview;
     }
 
     /**
@@ -172,7 +181,16 @@ public class Puzzle
             if(!imageStates[i].equals(SOLVED_STATE[i]))
                 return false;
         }
+        completed = true;
         return true;
+    }
+
+    /**
+     * @return true if this puzzle has been completed previously
+     */
+    public boolean wasCompleted()
+    {
+        return completed;
     }
 
     public String toString()
