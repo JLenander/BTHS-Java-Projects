@@ -6,11 +6,17 @@
 .image-view:hover
 {
     -fx-scale-x: 1.02;
-    -fx-scale-y: 1.02;    
+    -fx-scale-y: 1.02;
 }
 
 .image-view:pressed
 {
     -fx-scale-x: 1.04;
     -fx-scale-y: 1.04;
+}
+
+.image-view:disabled
+{
+    -fx-scale-x: 1.0;
+    -fx-opacity: 1.0;
 }

@@ -80,7 +80,7 @@ public class PicturePuzzleGame
         // puzzleDescriptionText.setLayoutX(475);
         
         //The text for the description of the preview image (found in the main menu screen)
-        previewImageText = new Text(600, 900, "Estimated difficulty: " + activePuzzle.getDifficulty() + ". " + activePuzzle.getDescription());
+        previewImageText = new Text(600, 900, "Estimated difficulty: " + activePuzzle.getDifficulty() + " out of 10. " + activePuzzle.getDescription());
         previewImageText.setFont(new Font(30));
         previewImageText.setWrappingWidth(1200);
         // previewImageText.setLayoutX(600);
@@ -97,7 +97,7 @@ public class PicturePuzzleGame
             imageViewGameObjects[i] = new ImageView(getActiveImageArray()[i]);
             imageViewGameObjects[i].setPreserveRatio(true);
 
-            //Sets the action of the images when clicked. The images should check for 
+            //Sets the action of the images when clicked.
             imageViewGameObjects[i].setOnMouseClicked(new EventHandler<MouseEvent>()
             {
                 @Override
@@ -119,6 +119,7 @@ public class PicturePuzzleGame
                         if(indexOne == -1 && indexTwo == -1) //No other images are selected, store the first selected image
                         {
                             indexOne = index;
+                            imageViewGameObjects[indexOne].setStyle("-fx-opacity: 0.8;");
                         }
                         else if(indexOne == index) //deselect both images. Do not swap image with itself.
                         {
@@ -175,6 +176,7 @@ public class PicturePuzzleGame
         }
 
         updateActiveImages();
+        reset();
         
         //adds the transitions the the animations
         puzzleWinAnimation = new SequentialTransition();
@@ -216,6 +218,7 @@ public class PicturePuzzleGame
             allowSelection = true;
             numSwaps = 0;
             deselectImage();
+            enableImages();
             updateActiveImages();
         }
     }
@@ -238,6 +241,7 @@ public class PicturePuzzleGame
             allowSelection = false;
             numSwaps = 0;
             deselectImage();
+            disableImages();
             updateActiveImages();
         }
     }
@@ -251,15 +255,27 @@ public class PicturePuzzleGame
     }
 
     /**
-     * Deselects any selected images. Also handles clearing the visual indicator for selected images.
+     * Clears the visual indicator for selected images.
+     * Generally called by deselectImage but can also be called standalone.
+     */
+    public void clearSelectStyle()
+    {
+        imageViewGameObjects[indexOne].setStyle("-fx-opacity: 1.0");
+
+    }
+
+    /**
+     * Deselects any selected images. Also clears the visual indicator for selected images.
      */
     public void deselectImage()
     {
-        if(allowSelection)
+        if(indexOne > -1)
         {
-            indexOne = -1;
-            indexTwo = -1;
+            clearSelectStyle();
         }
+
+        indexOne = -1;
+        indexTwo = -1;
     }
 
     /**
@@ -323,6 +339,7 @@ public class PicturePuzzleGame
                             feedbackMessage.setText("You Won with just " + numSwaps + " swaps!");
                             allowButtons = false; //prevent the player from using the buttons when the win animation is playing. Is reset when the animation finishes.
                             gameWon = true;
+                            disableImages();
                             puzzleWinAnimation.play();
                             System.out.println("Puzzle has been solved");
                         }
@@ -346,7 +363,7 @@ public class PicturePuzzleGame
     {
         //Updates puzzle specific text objects
         puzzleDescriptionText.setText(activePuzzle.getDescription());
-        previewImageText.setText("Estimated difficulty: " + activePuzzle.getDifficulty() + ". " + activePuzzle.getDescription());
+        previewImageText.setText("Estimated difficulty: " + activePuzzle.getDifficulty() + " out of 10. " + activePuzzle.getDescription());
 
         previewImageView.setImage(activePuzzle.getPreviewImage());
 
@@ -421,6 +438,9 @@ public class PicturePuzzleGame
         }
         else
         {
+            //clear the selected image style
+            clearSelectStyle();
+
             //change the animations to the selected images
             setAnimationNode(imageViewGameObjects[indexOne], imageViewGameObjects[indexTwo]);
             allowButtons = false; //This is reset at the end of the animation
@@ -444,6 +464,30 @@ public class PicturePuzzleGame
         swapAnimationTwo.setNode(imageViewTwo);
         imgTwoFirstRotate.setNode(imageViewTwo);
         imgTwoSecondRotate.setNode(imageViewTwo);
+    }
+
+    /**
+     * Sets the disabled property of all of the imageview objects to false.
+     * This re-enables the scale change on hover and other css pseudo classes.
+     */
+    public void enableImages()
+    {
+        for(int i = 0; i < imageViewGameObjects.length; i++)
+        {
+            imageViewGameObjects[i].setDisable(false);
+        }
+    }
+
+    /**
+     * Sets the disabled property of all of the imageview objects to true.
+     * This prevents the scale change on hover.
+     */
+    public void disableImages()
+    {
+        for(int i = 0; i < imageViewGameObjects.length; i++)
+        {
+            imageViewGameObjects[i].setDisable(true);
+        }
     }
 
     /**

@@ -90,7 +90,6 @@ public class App extends Application
                 if(event.getCode().getName().equals("Esc"))
                 {
                     game.deselectImage();
-                    System.out.println("Deselected image");
                 }
             }
         });
