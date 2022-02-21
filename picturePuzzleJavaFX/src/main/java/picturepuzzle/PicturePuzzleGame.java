@@ -42,7 +42,7 @@ public class PicturePuzzleGame
     private SequentialTransition puzzleWinAnimation;
     private TranslateTransition[] puzzleWinTranslateTransitions;
     /**The javafx animation used to reverse the puzzle solved animation (Yea kinda couldn't find another workaround so this is it)*/
-    private ParallelTransition reversedPuzzleWinAnimation;
+    private SequentialTransition reversedPuzzleWinAnimation;
     private TranslateTransition[] reversedPuzzleWinTranslateTransitions;
     /**Boolean used to know when the player has won. (The animation to reverse the puzzle win translations must be played only when the player has won and is resetting the game) */
     private boolean gameWon = false;
@@ -210,7 +210,7 @@ public class PicturePuzzleGame
         puzzleWinAnimation = new SequentialTransition();
         puzzleWinAnimation.setAutoReverse(false);
         puzzleWinAnimation.setInterpolator(Interpolator.LINEAR);
-        reversedPuzzleWinAnimation = new ParallelTransition();
+        reversedPuzzleWinAnimation = new SequentialTransition();
         for(int i = 0; i < puzzleWinTranslateTransitions.length; i++)
         {
             puzzleWinAnimation.getChildren().add(puzzleWinTranslateTransitions[i]);
