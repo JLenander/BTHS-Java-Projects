@@ -1,18 +1,20 @@
 package picturepuzzle;
 
 import java.io.FileNotFoundException;
-import javafx.scene.input.*;
+
 import javafx.application.Application;
-import javafx.event.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.*;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.text.*;
-
-import javafx.scene.paint.*;
 
 public class App extends Application 
 {

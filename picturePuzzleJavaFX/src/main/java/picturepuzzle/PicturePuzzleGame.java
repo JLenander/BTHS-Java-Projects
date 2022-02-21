@@ -1,16 +1,22 @@
 package picturepuzzle;
 
 import java.io.FileNotFoundException;
-import javafx.scene.image.*;
-import javafx.scene.text.*;
-import javafx.scene.transform.*;
-import javafx.util.Duration;
-import javafx.scene.input.MouseEvent;
-import javafx.event.*;
-import javafx.animation.*;
 
-import javafx.scene.shape.*;
-import javafx.scene.paint.*;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 
 /**
  * Handles all the game logic
