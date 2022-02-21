@@ -61,14 +61,14 @@ public class PicturePuzzleGame
     public PicturePuzzleGame() throws FileNotFoundException
     {
         puzzles = new Puzzle[8];
-        puzzles[0] = new Puzzle("The moon Io", "This is a TRUE-COLOR image of one of Jupiter's moons. The moon Io is the most geologically active object in our solar system. The volcanic activity produces a very interesting and colorful surface.", "images/puzzle1/", 1);
-        puzzles[1] = new Puzzle("City 17", "City 17. The home of the citadel and the center of events in the Half-Life Universe. Pictured here in the VR game Half-Life Alyx.", "images/puzzle2/", 2);
-        puzzles[2] = new Puzzle("Smash Bros", "This rendition of the characters in the popular fighting game series Super Smash Bros Ultimate is full of detail, making for an excellent matching experience.", "images/puzzle3/", 3);
-        puzzles[3] = new Puzzle("XCOM Berserker", "The Berserker is a terrifying enemy appearing in the XCOM series. This puzzle is trickier than it might seem.", "images/puzzle4/", 3);
-        puzzles[4] = new Puzzle("Elite Dangerous", "This spaceship fighting game features lots of space and lots of ships. Similar colors and straight laser blasts make this a medium difficulty puzzle.", "images/puzzle5/", 4);
-        puzzles[5] = new Puzzle("An Australian Coast", "This beautiful Australian coastal image may look simple, but symmetry provides a moderate challenge.", "images/puzzle6/", 6);
-        puzzles[6] = new Puzzle("Thargoid Encounter", "The bizzare shapes and curves of the Thargoid alien ship makes this puzzle tricky for those unfamiliar with this fictional spacecraft.", "images/puzzle7/", 8);
-        puzzles[7] = new Puzzle("An American suburb", "Black and White combined with the meaningless patterns of American Suburbs make this the most difficult puzzle to master. Study the preview image carefully!", "images/puzzle8/", 10);
+        puzzles[0] = new Puzzle("The moon Io", "This is a TRUE-COLOR image of one of Jupiter's moons. The moon Io is the most geologically active object in our solar system. The volcanic activity produces a very interesting and colorful surface.", "picturepuzzle/images/puzzle1/", 1);
+        puzzles[1] = new Puzzle("City 17", "City 17. The home of the citadel and the center of events in the Half-Life Universe. Pictured here in the VR game Half-Life Alyx.", "picturepuzzle/images/puzzle2/", 2);
+        puzzles[2] = new Puzzle("Smash Bros", "This rendition of the characters in the popular fighting game series Super Smash Bros Ultimate is full of detail, making for an excellent matching experience.", "picturepuzzle/images/puzzle3/", 3);
+        puzzles[3] = new Puzzle("XCOM Berserker", "The Berserker is a terrifying enemy appearing in the XCOM series. This puzzle is trickier than it might seem.", "picturepuzzle/images/puzzle4/", 3);
+        puzzles[4] = new Puzzle("Elite Dangerous", "This spaceship fighting game features lots of space and lots of ships. Similar colors and straight laser blasts make this a medium difficulty puzzle.", "picturepuzzle/images/puzzle5/", 4);
+        puzzles[5] = new Puzzle("An Australian Coast", "This beautiful Australian coastal image may look simple, but symmetry provides a moderate challenge.", "picturepuzzle/images/puzzle6/", 6);
+        puzzles[6] = new Puzzle("Thargoid Encounter", "The bizzare shapes and curves of the Thargoid alien ship makes this puzzle tricky for those unfamiliar with this fictional spacecraft.", "picturepuzzle/images/puzzle7/", 8);
+        puzzles[7] = new Puzzle("An American suburb", "Black and White combined with the meaningless patterns of American Suburbs make this the most difficult puzzle to master. Study the preview image carefully!", "picturepuzzle/images/puzzle8/", 10);
         activePuzzle = puzzles[0];
         System.out.println("Puzzle layout example, puzzle 0: " + activePuzzle);
 

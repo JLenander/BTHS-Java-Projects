@@ -1,6 +1,5 @@
 package picturepuzzle;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javafx.scene.image.*;
 
@@ -41,10 +40,11 @@ public class Puzzle
         images = new Image[16];
         for(int i = 0; i < images.length; i++) //FULFILLING PROJECT REQUIREMENT: A for loop is better than a while loop because we can access the items in the image array with i
         {
-            images[i] = new Image(new FileInputStream(location + imageStates[i]));
+            
+            images[i] = new Image(getClass().getResource("/" + location + imageStates[i]).toString());
         }
 
-        preview = new Image(new FileInputStream(location + "preview.png"));
+        preview = new Image(getClass().getResource("/" + location + "preview.png").toString());
     }
 
     /**
