@@ -170,6 +170,25 @@ public class PicturePuzzleGame
             public void handle(ActionEvent event)
             {
                 allowButtons = true;
+
+                //Resets the index variables after the animation is finished.
+                activePuzzle.swap(indexOne, indexTwo);
+                deselectImage();
+
+                //Checks if the puzzle is solved
+                if(activePuzzle.isSolved())
+                {
+                    feedbackMessage.setText("You Won with just " + numSwaps + " swaps!");
+                    allowButtons = false; //prevent the player from using the buttons when the win animation is playing. Is reset when the animation finishes.
+                    gameWon = true;
+                    disableImages();
+                    puzzleWinAnimation.play();
+                    System.out.println("Puzzle has been solved");
+                }
+                else
+                {
+                    allowSelection = true;
+                }
             }
         });
 
@@ -330,34 +349,6 @@ public class PicturePuzzleGame
         else
         {
             rt.setByAngle(-90);
-            if(imgOne)
-            {
-                rt.setOnFinished(new EventHandler<ActionEvent>()
-                {
-                    @Override
-                    public void handle(ActionEvent event)
-                    {
-                        //Resets the index variables after the animation is finished.
-                        activePuzzle.swap(indexOne, indexTwo);
-                        deselectImage();
-
-                        //Checks if the puzzle is solved
-                        if(activePuzzle.isSolved())
-                        {
-                            feedbackMessage.setText("You Won with just " + numSwaps + " swaps!");
-                            allowButtons = false; //prevent the player from using the buttons when the win animation is playing. Is reset when the animation finishes.
-                            gameWon = true;
-                            disableImages();
-                            puzzleWinAnimation.play();
-                            System.out.println("Puzzle has been solved");
-                        }
-                        else
-                        {
-                            allowSelection = true;
-                        }
-                    }
-                });
-            }
         }
 
         return rt;
