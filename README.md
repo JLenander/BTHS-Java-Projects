@@ -1,8 +1,13 @@
 # Picture Puzzle High School JavaFX MP2 project
 
-Picture Puzzle game created using Java 11 and JavaFX 11. Made for a high school marking period project. Standalone JAR in `./sample` confirmed to work on windows.
+Picture Puzzle game created using **Java 11** and **JavaFX 11**. Built using **Maven**. Made for a high school marking period project. Standalone JAR in `./sample` confirmed to work on windows 10.
 
-## Showcase GIFS:
+### To run project:
+- Ensure you have at least Java 11 (verify with `java --version`)
+- Download and double click [picturePuzzleJavaFX.jar](https://github.com/JLenander/BTHS-Java-Projects/blob/main/sample/picturePuzzleJavaFX.jar)
+- Alternatively, via command line run `java -jar picturePuzzleJavaFX.jar` in the directory you downloaded the jar file in.
+
+# Showcase GIFS:
 
 ### Main Menu
 ![Main Menu, 8 puzzles to choose from](sample/README_imgs/picturePuzzleMainMenu.gif)
@@ -13,7 +18,7 @@ Picture Puzzle game created using Java 11 and JavaFX 11. Made for a high school 
 ### Satisfying win animation
 ![Win animation, pieces slide into place to form the full image](sample/README_imgs/picturePuzzleWinAnim.gif)
 
-## Instructions for packaging the javafx file
+## Build instructions
 ### (These are not user instructions but are self reminders.)
 
 using OpenJDK version 11.0.9.1, Javafx version 11.0.2,
